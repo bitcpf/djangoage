@@ -7,6 +7,10 @@ Make it work
 
 Then, it should be deployed 
 
+For extra library, put them in requirement with git or https, run install_dev, will install the library with pip automatically
+
+
+
 # The Djangae Scaffold Project
 
 This is a barebones Django project configured for use on App Engine using [Djangae](https://github.com/potatolondon/djangae)

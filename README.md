@@ -1,3 +1,11 @@
+Chris Cui
+
+Make it work
+
+1. Need to change all the content of scaffold in .py, yaml files to the app name
+2. change the appname of yaml file to the GAE project ID
+
+Then, it should be deployed 
 
 # The Djangae Scaffold Project
 

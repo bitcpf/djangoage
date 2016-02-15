@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AlphaNodus Nest API Demo</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+var c=0
+var t
+function timedCount()
+{
+document.getElementById('ncnt').value=c
+c=c+1
+        $.get("/get_nest",function(ret){
+	    data = JSON.parse(ret)
+	    if(data["humidity"]){
+                $('#hum').html(data["humidity"])
+	    }
+	    if(data["ambient_temperature_f"]){
+	       $('#cur_tep').html(data["ambient_temperature_f"]) 
+ 	    }
+	    if(data["target_temperature_f"]){
+	       $('#tar_tep').html(data["target_temperature_f"]) 
+ 	    }
+        })
+t=setTimeout("timedCount()",20000)
+}
+</script>
+</head>
+<body>
+Welcome to AlphaNodus Nest Controller!<br>
+
+<form>
+<input type="button" id = "update" value="Start Polling！" onClick="timedCount()">
+<input type="text" id="ncnt">
+</form>
+
+<p>Click the button above will get the Thermostat Data</p>
+<p>Humindity: <span id='hum'></span></p>
+<p>Current Temperature: <span id='cur_tep'></span></p>
+<p>Target Temperature: <span id='tar_tep'></span></p>
+
+
+<form>
+    Target Temperature: <input type="text" id="target_temp" name="target_temp"> <br>
+    <p>Configured Value: <span id='result'></span></p>
+    <button type="button" id='sum'>Set</button>
+</form>
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+      $("#sum").click(function(){
+        var a = $("#target_temp").val();
+        $.get("/set_temp/",{'a':a}, function(ret){
+            $('#result').html(ret)
+        })
+      });
+    });
+</script>
+
+
+
+
+</body>
+</html>

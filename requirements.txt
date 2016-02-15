@@ -7,6 +7,10 @@ django-session-csrf
 nose
 six
 
+
+requests==2.3
+python-nest
+
 # Uncomment these to use mapreduce or djangae.contrib.uniquetool (which uses mapreduce)
 # These are forks of Google's libraries, which contain various fixes and patches
 #git+https://github.com/potatolondon/appengine-pipelines.git

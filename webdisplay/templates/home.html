@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AlphaNodus API Demo</title>
+</head>
+<body>
+
+<h1>Welcome to AlphaNodus Nest Web! </h1>
+<br>
+
+
+<p>Humindity: <span id='cur_hum'></span></p>
+<p>Current Temperature: <span id='cur_tep'></span></p>
+
+<form>
+    <p>Current Target Temperature: <span id='cur_target'></span></p>
+    Target Temperature: <input type="text" id="target_temp"> <br>
+    <button type="button" id='settemp'>Set</button>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+
+
+
+      $(window).load(function() {
+ 	filldata()
+
+        // executes when complete page is fully loaded, including all frames, objects and images
+        setInterval(filldata,8000);       
+       });
+        
+        function filldata(){
+          $.get("/get_data",function(ret){
+              data = JSON.parse(ret)
+              if(data['Humidity']){
+                  $('#cur_hum').html(data['Humidity'])
+              }
+              if(data['Temperature']){
+                  $('#cur_tep').html(data['Temperature'])
+              }
+              if(data['Target']){
+                  $('#cur_target').html(data['Target'])
+              }
+          })
+                
+        }
+
+      $("#settemp").click(function(){
+        var a = $("#target_temp").val();
+        $.get("/set_temp/",{'a':a}, function(ret){
+            $('#cur_target').html(ret)
+        })
+      });
+
+	
+
+    });
+</script>
+
+
+
+
+</body>
+</html>
